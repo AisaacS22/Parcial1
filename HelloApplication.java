@@ -1,21 +1,65 @@
 package com.devmate.parcialr1;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ChoiceDialog;
 import java.util.Optional;
 
 public class UniversityRegistrationApplication extends Application {
-    @Override
-    public void start(Stage stage) {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        Label messageLabel = new Label("\t\t\t\t¡Bienvenido al Sistema de Registro Universitario!\n\n" +
+                "\tEn este sistema, podrás completar y enviar tu formulario de inscripción\n"+
+                "\ta nuestra universidad de manera rápida y sencilla. Solo necesitas\n" +
+                "\tproporcionar la información requerida y seleccionar las opciones" +
+                "correspondientes. \n"+
+                "\t¡Estamos emocionados de que te unas a nuestra comunidad" +
+                "académica!\n" +
+                "\tSi tienes alguna pregunta durante el proceso de registro, no dudes " +
+                "en ponerte \n \ten contacto con nuestro equipo de soporte.\n\n\t\t\t\t¡Esperamos verte " +
+                "pronto en nuestra universidad!");
+
+        messageLabel.setStyle("-fx-font-size: 11pt; -fx-font-weight: bold; -fx-text-fill: darkblue;");
+
+        // Crear un botón para abrir la ventana de registro
+        Button startButton = new Button("Iniciar Registro");
+        startButton.setOnAction(event -> {
+            Stage registrationStage = new Stage();
+            startRegistration(registrationStage);
+        });
+
+        VBox vbox = new VBox(20);
+        vbox.getChildren().addAll(messageLabel, startButton);
+        vbox.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(vbox, 400, 250);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void startRegistration(Stage stage) {
+        stage.setTitle("Formulario de Inscripción Universitaria");
         //Nombres de los Label
         Label nameLabel = new Label("Nombre");
         TextField nameText = new TextField();
@@ -162,12 +206,7 @@ public class UniversityRegistrationApplication extends Application {
         });
 
         Scene scene = new Scene(gridPane);
-        stage.setTitle("Formulario de Inscripción Universitaria");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
